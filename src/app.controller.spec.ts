@@ -1,12 +1,23 @@
-import { Controller, Get } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppController } from './app.controller';
 
-@Controller()
-export class AppController {
-  @Get()
-  health() {
-    return {
+describe('AppController', () => {
+  let controller: AppController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [AppController],
+    }).compile();
+
+    controller = module.get<AppController>(AppController);
+  });
+
+  it('should return health status', () => {
+    process.env.APP_NAME = 'AZT API';
+
+    expect(controller.health()).toEqual({
       status: 'OK',
-      app: process.env.APP_NAME,
-    };
-  }
-}
+      app: 'AZT API',
+    });
+  });
+});

@@ -1,48 +1,51 @@
 import {
-Entity,
-PrimaryGeneratedColumn,
-Column,
-CreateDateColumn,
-UpdateDateColumn,
-ManyToOne,
-JoinColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import { Role } from '../../roles/entities/role.entity';
 
 @Entity('users')
 export class User {
-@PrimaryGeneratedColumn('uuid')
-id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-@Column({ unique: true })
-email: string;
+  @Column({ unique: true })
+  email: string;
 
-@Column()
-password: string;
+  @Column({ select: false })
+  password: string;
 
-@Column()
-firstName: string;
+  @Column()
+  firstName: string;
 
-@Column({ nullable: true })
-lastName: string;
+  @Column({ nullable: true })
+  lastName: string;
 
-@Column({ nullable: true, unique: true })
-phone: string;
+  @Column({ nullable: true, unique: true })
+  phone: string;
 
-@ManyToOne(() => Role)
-@JoinColumn({ name: 'role_id' })
-role: Role;
+  @ManyToOne(() => Role, (role) => role.users, { nullable: false })
+  @JoinColumn({ name: 'role_id' })
+  role: Role;
 
-@Column({ default: true })
-isActive: boolean;
+  @Column({ default: 0, type: 'int' })
+  status: number;
 
-@Column({ default: false })
-isEmailVerified: boolean;
+  @Column({ default: true })
+  isActive: boolean;
 
-@CreateDateColumn()
-createdAt: Date;
+  @Column({ default: false })
+  isEmailVerified: boolean;
 
-@UpdateDateColumn()
-updatedAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
