@@ -3,7 +3,7 @@ services:
     name: azt-api
     runtime: node
     plan: free
-    buildCommand: npm install && npx nest build
+    buildCommand: npm install --include=dev && npm run build && npm prune --production
     startCommand: npm run start:prod
     envVars:
       - key: NODE_VERSION
