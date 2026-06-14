@@ -44,6 +44,6 @@ async function bootstrap() {
   console.log('PORT:', process.env.PORT);
   console.log('SWAGGER:', '/api/docs');
 
-  await app.listen(process.env.PORT || 3000);
+  await app.listen(process.env.PORT || 3001);
 }
 void bootstrap();
