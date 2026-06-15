@@ -24,6 +24,7 @@ function setupSwagger(app: INestApplication) {
   SwaggerModule.setup('api/docs', app, document, {
     swaggerOptions: {
       persistAuthorization: true,
+      defaultModelsExpandDepth: -1,
     },
     customSiteTitle: 'AZT API Docs',
   });
