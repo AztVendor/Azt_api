@@ -81,6 +81,7 @@ export class AuthService implements OnApplicationBootstrap {
       userId: user.id,
       email: user.email,
       roleCode: Number(user.role.roleCode),
+      roleName: user.role.roleName,
     };
 
     return {
